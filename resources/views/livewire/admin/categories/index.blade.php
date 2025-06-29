@@ -14,7 +14,7 @@
                     <input type="text" wire:model.defer="name" placeholder="Category name"
                         class="border rounded p-2 w-full">
                     <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
-                        {{ $isEditing ? 'Update' : 'Tambah' }}
+                        {{ $isEditing ? 'Update' : 'Add' }}
                     </button>
                 </div>
                 @error('name') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror

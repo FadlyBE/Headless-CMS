@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('permissions', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique(); // e.g. create_user
-            $table->string('label')->nullable(); // Optional: "Create User"
-            $table->timestamps();
-        });
+        // Schema::create('permissions', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('name')->unique(); // e.g. create_user
+        //     $table->string('label')->nullable(); // Optional: "Create User"
+        //     $table->timestamps();
+        // });
     }
 
     /**

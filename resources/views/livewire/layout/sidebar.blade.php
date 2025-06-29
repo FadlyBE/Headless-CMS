@@ -47,13 +47,33 @@
         </a>
 
         <!-- Users -->
-        <a href="#" class="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+        <a href="{{ route('admin.users.index') }}" class="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
             <svg class="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" stroke-width="2"
                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M5.121 17.804A9 9 0 1112 21a9.003 9.003 0 01-6.879-3.196z"></path>
             </svg>
             Users
+        </a>
+
+        <!-- Roles -->
+        <a href="{{ route('admin.roles.index') }}" class="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+            <svg class="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M16 7a4 4 0 01.88 7.88A4 4 0 1112 8h4z"></path>
+            </svg>
+            Roles
+        </a>
+
+        <!-- Permissions -->
+        <a href="{{ route('admin.permissions.index') }}" class="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+            <svg class="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M9 17v-6h13M9 5h13M5 12h.01M5 5h.01M5 19h.01"></path>
+            </svg>
+            Permissions
         </a>
 
         <!-- Logout -->
