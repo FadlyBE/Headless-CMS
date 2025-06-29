@@ -32,13 +32,13 @@ class Index extends Component
                 'name' => $this->name,
                 'slug' => Str::slug($this->name),
             ]);
-            session()->flash('success', 'Kategori berhasil diperbarui.');
+            session()->flash('success', 'Category added successfully.');
         } else {
             Category::create([
                 'name' => $this->name,
                 'slug' => Str::slug($this->name),
             ]);
-            session()->flash('success', 'Kategori berhasil ditambahkan.');
+            session()->flash('success', 'Category added successfully.');
         }
 
         $this->resetForm();
@@ -55,7 +55,7 @@ class Index extends Component
     public function delete($id)
     {
         Category::findOrFail($id)->delete();
-        session()->flash('success', 'Kategori berhasil dihapus.');
+        session()->flash('success', 'Category deleted successfully.');
     }
 
     public function resetForm()

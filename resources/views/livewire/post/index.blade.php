@@ -7,6 +7,7 @@
     <div class="bg-white shadow-md rounded-lg p-6 mt-6">
         <div class="flex items-center justify-between mb-4">
             <h2 class="text-2xl font-semibold text-gray-800">Posts</h2>
+            @can('create_post')
             <button wire:click="create"
                 class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none"
@@ -16,6 +17,7 @@
                 </svg>
                 New Post
             </button>
+            @endcan
         </div>
 
         <table class="min-w-full border border-gray-300 mt-6">
@@ -48,6 +50,7 @@
                     </td>
                     <td class="py-2 px-4 border-b">{{ ucfirst($post->status) }}</td>
                     <td class="py-2 px-4 border-b space-x-2">
+                    @can('edit_post')
                         <button wire:click="edit({{ $post->id }})" class="inline-flex items-center text-blue-600 hover:underline mr-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
@@ -56,7 +59,8 @@
                             </svg>
                             Edit
                         </button>
-
+                        @endcan
+                        @can('delete_post')
                         <button wire:click.prevent="delete({{ $post->id }})"
                             onclick="return confirm('Are you sure you want to delete?')"
                             class="inline-flex items-center text-red-600 hover:underline">
@@ -67,6 +71,7 @@
                             </svg>
                             Delete
                         </button>
+                        @endcan
                     </td>
 
                 </tr>
@@ -161,14 +166,14 @@
 
                     
                     <script>
-    document.addEventListener('alpine:init', () => {
-        Alpine.store('categories', {
-            @foreach ($categories as $category)
-                {{ $category->id }}: @json($category->name){{ !$loop->last ? ',' : '' }}
-            @endforeach
-        });
-    });
-</script>
+                        document.addEventListener('alpine:init', () => {
+                            Alpine.store('categories', {
+                                @foreach ($categories as $category)
+                                    {{ $category->id }}: @json($category->name){{ !$loop->last ? ',' : '' }}
+                                @endforeach
+                            });
+                        });
+                    </script>
 
 
                 </div>

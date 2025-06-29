@@ -9,14 +9,14 @@ use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 
 #[Layout('layouts.app')]
 
 class Index extends Component
 {
-    use WithFileUploads;
-    use WithPagination;
+    use WithFileUploads, WithPagination, AuthorizesRequests;
     protected $paginationTheme = 'tailwind';
     public $image;
     public $image_upload;
@@ -40,6 +40,7 @@ class Index extends Component
 
     public function create()
     {
+        $this->authorize('create_post');
         $this->resetInput();
         $this->openModal();
     }
@@ -58,6 +59,7 @@ class Index extends Component
 
     public function store()
     {
+        $this->authorize($this->postId ? 'edit_post' : 'create_post');
         $this->validate([
             'title' => 'required|string|max:255',
             'content' => 'required',
@@ -90,6 +92,7 @@ class Index extends Component
 
     public function edit($id)
     {
+        $this->authorize('edit_post');
         $post = Post::findOrFail($id);
         $this->selectedCategories = $post->categories->pluck('id')->map(fn($id) => (string) $id)->toArray();
         $this->postId = $post->id;
