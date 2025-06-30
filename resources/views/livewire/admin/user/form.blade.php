@@ -3,7 +3,7 @@
         <h2 class="text-xl font-bold mb-4">{{ $userId ? 'Edit' : 'Create' }} User</h2>
 
         <div class="mb-4">
-            <label class="block text-sm">Name</label>
+            <label class="block text-sm">{{ __('thead.name')}}</label>
             <input type="text" wire:model="name" class="w-full border rounded p-2">
         </div>
 
@@ -13,7 +13,7 @@
         </div>
 
         <div class="mb-4">
-            <label class="block text-sm">Role</label>
+            <label class="block text-sm">{{ __('sidebar.role')}}</label>
             <select wire:model="role" class="w-full border rounded p-2">
                 <option value="">-- Select Role --</option>
                 @foreach ($allRoles as $roleName)
@@ -23,7 +23,7 @@
         </div>
 
         <div class="mb-4">
-            <label class="block text-sm">Permissions</label>
+            <label class="block text-sm">{{ __('thead.permission')}}</label>
             @foreach ($allPermissions as $perm)
                 <label class="block text-sm">
                     <input type="checkbox" wire:model="permissions" value="{{ $perm }}">
@@ -33,8 +33,8 @@
         </div>
 
         <div class="flex justify-end space-x-2">
-            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Save</button>
-            <button wire:click="$dispatch('closeModal')" class="bg-gray-300 px-4 py-2 rounded">Cancel</button>
+            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">{{ __('button.save')}}</button>
+            <button wire:click="$dispatch('closeModal')" class="bg-gray-300 px-4 py-2 rounded">{{ __('button.cancel')}}</button>
         </div>
     </div>
 </div>

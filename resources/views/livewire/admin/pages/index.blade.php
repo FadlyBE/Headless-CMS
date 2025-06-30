@@ -7,20 +7,20 @@
 
     <div class="bg-white shadow-md rounded-lg p-6 mt-6">
         <div class="flex items-center justify-between mb-4">
-            <h2 class="text-2xl font-semibold text-gray-800">Pages</h2>
+            <h2 class="text-2xl font-semibold text-gray-800">{{ __('sidebar.pages')}}</h2>
             <button wire:click="create"
                 class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700">
-                + Add Page
+                {{ __('button.create')}}
             </button>
         </div>
 
         <table class="min-w-full border border-gray-300 mt-4">
             <thead class="bg-gray-100">
                 <tr>
-                    <th class="py-2 px-4 border">Title</th>
-                    <th class="py-2 px-4 border">Status</th>
-                    <th class="py-2 px-4 border">Slug</th>
-                    <th class="py-2 px-4 border w-40">Actions</th>
+                    <th class="py-2 px-4 border">{{ __('thead.title')}}</th>
+                    <th class="py-2 px-4 border">{{ __('thead.status')}}</th>
+                    <th class="py-2 px-4 border">{{ __('thead.slug')}}</th>
+                    <th class="py-2 px-4 border w-40">{{ __('thead.action')}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,7 +40,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M11 5h2M4 17l4.586-4.586a2 2 0 012.828 0L16 17M14 13l6-6m0 0a2.121 2.121 0 00-3-3L11 10" />
                             </svg>
-                            Edit
+                            {{ __('button.edit')}}
                         </button>
 
                         <button wire:click.prevent="delete({{ $page->id }})"
@@ -51,7 +51,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M6 18L18 6M6 6l12 12" />
                             </svg>
-                            Delete
+                            {{ __('button.delete')}}
                         </button>
                     </td>
                 </tr>
@@ -75,7 +75,7 @@
         <div class="bg-white p-6 rounded w-full max-w-xl shadow-xl"
             @click.away="showModal = false">
             <h2 class="text-xl font-semibold mb-4">
-                {{ $pageId ? 'Edit Page' : 'Create Page' }}
+                {{ $pageId ? __('button.update') :  __('button.create') }}
             </h2>
             <form wire:submit.prevent="store">
                 <input type="text" wire:model.defer="title" placeholder="Title"
@@ -91,8 +91,8 @@
                 </select>
 
                 <div class="flex justify-end gap-2 mt-4">
-                    <button type="button" @click="showModal = false" class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Save</button>
+                    <button type="button" @click="showModal = false" class="px-4 py-2 bg-gray-300 rounded">{{ __('button.cancel')}}</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">{{ __('button.save')}}</button>
                 </div>
             </form>
         </div>

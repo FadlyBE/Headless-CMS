@@ -7,9 +7,9 @@
     <div class="bg-white shadow-md rounded-lg p-6 mt-6">
 
         <div class="flex justify-between items-center mb-4">
-            <h1 class="text-xl font-semibold">Manajemen Role</h1>
+            <h1 class="text-xl font-semibold">{{ __('sidebar.role')}}</h1>
             <button wire:click="create" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow">
-                Add Role
+            {{ __('button.create')}}
             </button>
         </div>
         
@@ -17,8 +17,8 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-100 text-gray-700 text-sm">
                     <tr>
-                        <th class="px-4 py-3 text-left font-semibold">Nama Role</th>
-                        <th class="px-4 py-3 text-left font-semibold">Aksi</th>
+                        <th class="px-4 py-3 text-left font-semibold">{{ __('thead.name')}}</th>
+                        <th class="px-4 py-3 text-left font-semibold">{{ __('thead.action')}}</th>
                     </tr>
                 </thead>
                 <tbody class="text-sm text-gray-700">
@@ -33,7 +33,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M11 5h2M4 17l4.586-4.586a2 2 0 012.828 0L16 17M14 13l6-6m0 0a2.121 2.121 0 00-3-3L11 10" />
                                     </svg>
-                                    Edit
+                                    {{ __('button.edit')}}
                                 </button>
 
                                 <button wire:click.prevent="delete({{ $role->id }})"
@@ -44,7 +44,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M6 18L18 6M6 6l12 12" />
                                     </svg>
-                                    Delete
+                                    {{ __('button.delete')}}
                                 </button>
                             </td>
                         </tr>

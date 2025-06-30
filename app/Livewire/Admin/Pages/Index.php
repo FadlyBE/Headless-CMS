@@ -7,11 +7,13 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Str;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 
 #[Layout('layouts.app')]
 class Index extends Component
 {
-    use WithPagination;
+    use WithPagination, AuthorizesRequests;
 
     protected $paginationTheme = 'tailwind';
 
@@ -26,12 +28,15 @@ class Index extends Component
 
     public function create()
     {
+        $this->authorize('create_page');
         $this->resetInput();
         $this->isOpen = true;
     }
 
     public function edit($id)
     {
+        $this->authorize('edit_page');
+
         $page = Page::findOrFail($id);
         $this->pageId = $page->id;
         $this->title = $page->title;
@@ -43,6 +48,8 @@ class Index extends Component
 
     public function store()
     {
+        $this->authorize('create_page');
+
         $this->validate([
             'title' => 'required|string|max:255',
             'body' => 'required',
@@ -65,6 +72,8 @@ class Index extends Component
 
     public function delete($id)
     {
+        $this->authorize('delete_page');
+
         Page::findOrFail($id)->delete();
         session()->flash('message', 'Page deleted.');
     }

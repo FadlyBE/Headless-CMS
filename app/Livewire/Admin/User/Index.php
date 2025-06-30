@@ -7,7 +7,7 @@ use App\Models\User;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Attributes\Layout;
 
 #[Layout('layouts.app')]
@@ -16,7 +16,7 @@ class Index extends Component
 {
     protected $listeners = ['userSaved' => 'closeModal', 'closeModal' => 'closeModal'];
 
-    use WithPagination;
+    use WithPagination, AuthorizesRequests;
     public $selectedUserId;
     public $name;
     public $email;
@@ -46,12 +46,14 @@ class Index extends Component
 
     public function create()
     {
+        $this->authorize('create_user');
         $this->reset(['selectedUserId', 'name', 'email', 'role', 'permissions']);
         $this->openModal();
     }
 
     public function edit($id)
     {
+        $this->authorize('edit_user');
         $user = User::with(['roles', 'permissions'])->findOrFail($id);
 
         $this->selectedUserId = $user->id;
@@ -71,14 +73,16 @@ class Index extends Component
         ]);
     }
 
-    public function deleteUser($id)
+    public function delete($id)
     {
+        $this->authorize('delete_user');
         $user = User::findOrFail($id);
         $user->delete();
     }
 
     public function save()
     {
+        $this->authorize('create_user');
         $rules = [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $this->selectedUserId,

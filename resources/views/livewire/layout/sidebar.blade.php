@@ -22,7 +22,8 @@
                     d="M19 21H5a2 2 0 01-2-2V7a2 2 0 012-2h4l2-2h2l2 2h4a2 2 0 012 2v12a2 2 0 01-2 2z">
                 </path>
             </svg>
-            Posts
+            {{ __('sidebar.posts') }}
+
         </a>
 
         <!-- Categories -->
@@ -33,7 +34,8 @@
                     d="M20 13V5a2 2 0 00-2-2H6a2 2 0 00-2 2v8m16 0v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6m16 0H4">
                 </path>
             </svg>
-            Categories
+            {{ __('sidebar.category') }}
+
         </a>
 
         <a href="{{ route('admin.pages.index') }}"
@@ -43,7 +45,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M5 4h14a2 2 0 012 2v14l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2z" />
             </svg>
-            Pages
+            {{ __('sidebar.pages') }}
+
         </a>
 
         <!-- Users -->
@@ -53,7 +56,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M5.121 17.804A9 9 0 1112 21a9.003 9.003 0 01-6.879-3.196z"></path>
             </svg>
-            Users
+            {{ __('sidebar.users') }}
+
         </a>
 
         <!-- Roles -->
@@ -63,7 +67,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M16 7a4 4 0 01.88 7.88A4 4 0 1112 8h4z"></path>
             </svg>
-            Roles
+            {{ __('sidebar.role') }}
+
         </a>
 
         <!-- Permissions -->
@@ -73,7 +78,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M9 17v-6h13M9 5h13M5 12h.01M5 5h.01M5 19h.01"></path>
             </svg>
-            Permissions
+            {{ __('sidebar.permission') }}
         </a>
 
         <!-- Logout -->
@@ -87,7 +92,7 @@
                         d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2v1">
                     </path>
                 </svg>
-                Logout
+                {{ __('sidebar.logout') }}
             </button>
         </form>
     </nav>
