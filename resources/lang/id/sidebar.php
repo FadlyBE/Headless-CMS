@@ -8,4 +8,6 @@ return [
     'users' => 'Pengguna',
     'role' => 'Peran',
     'permission' => 'Perizinan',
+    'gallery' => 'Galeri',
+
 ];

@@ -8,4 +8,6 @@ return [
     'users' => 'Users',
     'role' => 'Role',
     'permission' => 'Permission',
+    'gallery' => 'Gallery',
+
 ];

@@ -7,22 +7,30 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\PermissionRegistrar;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class RolePermissionSeeder extends Seeder
 {
     public function run(): void
     {
+        $user = User::firstOrCreate(
+            ['email' => 'admin@example.com'],
+            [
+                'name' => 'Admin',
+                'password' => Hash::make('password'), // default password
+            ]
+        );
+
         // Hapus cache permission
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // Daftar permission
         $permissions = [
-            'create_user',
-            'delete_user',
-            'view_logs',
-            'edit_article',
-            'publish_article',
-            'view_article',
+            'create_user', 'delete_user', 'view_logs',
+            'edit_article', 'publish_article', 'view_article',
+            'create_post', 'edit_post', 'delete_post',
+            'edit_user', 'create_category', 'edit_category',
+            'delete_category', 'create_role', 'edit_role',
         ];
 
         // Buat permission
@@ -32,7 +40,7 @@ class RolePermissionSeeder extends Seeder
 
         // Buat role dan beri permission
         $admin = Role::firstOrCreate(['name' => 'Admin']);
-        $admin->givePermissionTo(['create_user', 'delete_user', 'view_logs']);
+        $admin->syncPermissions(Permission::all());
 
         $editor = Role::firstOrCreate(['name' => 'Editor']);
         $editor->givePermissionTo(['edit_article', 'publish_article']);
@@ -40,9 +48,6 @@ class RolePermissionSeeder extends Seeder
         $viewer = Role::firstOrCreate(['name' => 'Viewer']);
         $viewer->givePermissionTo(['view_article']);
 
-        $user = User::find(1);
-        if ($user) {
-            $user->assignRole('Admin');
-        }
+        $user->assignRole($admin);
     }
 }

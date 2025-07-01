@@ -6,7 +6,7 @@
     @endif
     <div class="bg-white shadow-md rounded-lg p-6 mt-6">
         <div class="flex items-center justify-between mb-4">
-            <h2 class="text-2xl font-semibold text-gray-800">Posts</h2>
+            <h2 class="text-2xl font-semibold text-gray-800">{{ __('sidebar.posts') }}</h2>
             @can('create_post')
             <button wire:click="create"
                 class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
