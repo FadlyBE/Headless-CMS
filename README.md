@@ -75,15 +75,15 @@ ID Bahasa Indonesia
 📡 API Endpoints
 Resource	Endpoint
 Posts 
-List : /api/v1/posts
-Detail : /api/v1/posts/{slug}
+List : /api/posts
+Detail : /api/posts/{slug}
 
 Pages 
-List : /api/v1/pages
-Detail : /api/v1/pages/{slug}
+List : /api/pages
+Detail : /api/pages/{slug}
 
 Categories: 
-List: /api/v1/categories
-Detail: /api/v1/categories/{id}
+List: /api/categories
+Detail: /api/categories/{id}
 
 API is public. You can use tools like Postman or cURL to test.
