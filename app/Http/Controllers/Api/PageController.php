@@ -10,18 +10,48 @@ class PageController extends Controller
 {
     public function index()
     {
-        return PageResource::collection(
-            Page::where('status', 'published')->get()
-        );
+
+        try {
+            $pages = Page::where('status', 'published')->get();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Pages retrieved successfully.',
+                'data' => PageResource::collection($pages),
+            ]);
+        } catch (\Throwable $e) {
+            \Log::error('Failed: ' . $e->getMessage());
+
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to retrieve pages.',
+                'data' => [],
+            ], 500);
+        }
     }
 
     public function show($slug)
     {
-        $page = Page::where('slug', $slug)
-            ->where('status', 'published')
-            ->firstOrFail();
+        try {
+            $page = Page::where('slug', $slug)
+                ->where('status', 'published')
+                ->firstOrFail();
 
-        return new PageResource($page);
+            return response()->json([
+                'status' => true,
+                'message' => 'Pages retrieved successfully.',
+                'data' => new PageResource($page)
+            ]);
+
+        } catch (\Throwable $e) {
+            
+            \Log::error('Failed: ' . $e->getMessage());
+
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to retrieve pages.',
+                'data' => [],
+            ], 500);
+        }
     }
 }
-

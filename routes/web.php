@@ -24,13 +24,8 @@ Route::get('dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-// Halaman umum
 // Route::view('/', 'welcome');
 Route::redirect('/', '/login');
-
-// Route::view('dashboard', 'dashboard')
-//     ->middleware(['auth', 'verified'])
-//     ->name('dashboard');
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])
