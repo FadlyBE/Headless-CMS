@@ -29,7 +29,7 @@ class Create extends Component
             'slug' => Str::slug($this->name),
         ]);
 
-        session()->flash('success', 'Kategori berhasil ditambahkan!');
+        session()->flash('success', 'Category created successfully');
         return redirect()->route('admin.categories.index');
     }
 
