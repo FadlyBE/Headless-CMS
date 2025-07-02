@@ -121,14 +121,14 @@
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
 
-               {{-- Preview gambar jika baru di-upload --}}
-            @if ($image instanceof \Livewire\TemporaryUploadedFile)
-                <div class="mb-2">
-                    <img src="{{ $image->temporaryUrl() }}"
-                        class="rounded object-cover"
-                        style="width: 96px; height: 96px;">
-                </div>
-            @endif
+                {{-- Preview gambar jika baru di-upload --}}
+                @if ($image instanceof \Livewire\TemporaryUploadedFile)
+                    <div class="mb-2">
+                        <img src="{{ $image->temporaryUrl() }}"
+                            class="rounded object-cover"
+                            style="width: 96px; height: 96px;">
+                    </div>
+                @endif
 
                 {{-- Preview untuk gambar dari database (saat edit & belum upload ulang) --}}
                 @if ($postId && is_string($image))
@@ -137,8 +137,6 @@
                             class="object-cover max-w-full max-h-full w-full h-full rounded">
                     </div>
                 @endif
-
-
 
                 <div class="mb-4" x-data="{ open: false, selected: @entangle('selectedCategories') }">
                     <label class="block text-gray-700 text-sm font-bold mb-2">Category</label>
