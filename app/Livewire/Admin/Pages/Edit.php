@@ -54,7 +54,7 @@ class Edit extends Component
             'status' => $this->status,
         ]);
 
-        session()->flash('success', 'Page berhasil diperbarui.');
+        session()->flash('success', 'Data updated.');
         return redirect()->route('admin.pages.index');
     }
 
