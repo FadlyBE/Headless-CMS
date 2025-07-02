@@ -37,8 +37,8 @@ class Gallery extends Component
             $this->image_upload->store('images', 'public');
             $this->reset('image_upload');
 
-            $this->loadImages(); // 💡 Panggil lagi untuk refresh list
-            session()->flash('message', 'Gambar berhasil di-upload!');
+            $this->loadImages(); 
+            session()->flash('message', 'Upload success');
         } catch (\Throwable $e) {
             \Log::error('Upload error: ' . $e->getMessage());
             session()->flash('error', $e->getMessage());
@@ -48,12 +48,12 @@ class Gallery extends Component
     public function delete($path)
     {
         try {
-            Storage::disk('public')->delete($path); // ✅ gunakan disk 'public'
-            $this->loadImages(); // Refresh daftar gambar
-            session()->flash('message', 'Gambar berhasil dihapus!');
+            Storage::disk('public')->delete($path);
+            $this->loadImages();
+            session()->flash('message', 'Data deleted');
         } catch (\Throwable $e) {
             \Log::error('Gagal hapus gambar: ' . $e->getMessage());
-            session()->flash('error', 'Gagal menghapus gambar.');
+            session()->flash('error', 'Failed to dele');
         }
     }
 
