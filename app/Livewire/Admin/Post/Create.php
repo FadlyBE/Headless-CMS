@@ -8,23 +8,37 @@ use Livewire\Attributes\Layout;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Str;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 #[Layout('layouts.app')]
 class Create extends Component
 {
-    use WithFileUploads;
-
-    public $title, $slug, $content, $excerpt, $status = 'draft', $published_at;
+    use WithFileUploads, AuthorizesRequests;
+    public $isOpen = false;
+    public $content;
+    public $postId;
+    public $title, $slug, $excerpt, $status = 'draft', $published_at;
     public $image;
     public $selectedCategories = [];
+
 
     public function updatedTitle($value)
     {
         $this->slug = Str::slug($value);
     }
 
-    public function save()
+    public function updatedImage()
     {
+        // Reset image lama dari DB agar tidak muncul dobel
+        if ($this->image instanceof \Livewire\TemporaryUploadedFile) {
+            $this->image = $this->image; // ini trigger tetap simpan image baru
+        }
+    }
+
+    public function store()
+    {
+        $this->authorize('create_post');
+
         $this->validate([
             'title' => 'required',
             'slug' => 'required|unique:posts,slug',
@@ -46,13 +60,18 @@ class Create extends Component
 
         $post->categories()->sync($this->selectedCategories);
 
-        session()->flash('success', 'Post created successfully!');
+         session()->flash('success', 'Post created successfully!');
+         $this->resetInput();
+         $this->isOpen = false;
+
+        $this->emit('resetTrix');
+
         return redirect()->route('admin.posts');
     }
 
     public function render()
     {
-        return view('livewire.post.create', [
+        return view('livewire.admin.post.create', [
             'categories' => Category::all()
         ]);
     }

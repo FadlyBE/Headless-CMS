@@ -8,30 +8,20 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 
 #[Layout('layouts.app')]
 
 class Edit extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, AuthorizesRequests;
 
     public $post;
     public $title, $slug, $content, $excerpt, $status, $published_at;
     public $image, $newImage;
     public $selectedCategories = [];
 
-    public function mount(Post $post)
-    {
-        $this->post = $post;
-        $this->title = $post->title;
-        $this->slug = $post->slug;
-        $this->content = $post->content;
-        $this->excerpt = $post->excerpt;
-        $this->status = $post->status;
-        $this->published_at = $post->published_at;
-        $this->image = $post->image;
-        $this->selectedCategories = $post->categories->pluck('id')->toArray();
-    }
 
     public function updatedTitle($value)
     {
@@ -40,6 +30,8 @@ class Edit extends Component
 
     public function update()
     {
+        $this->authorize('create_post');
+
         $this->validate([
             'title' => 'required',
             'slug' => 'required|unique:posts,slug,' . $this->post->id,
@@ -64,12 +56,14 @@ class Edit extends Component
         $this->post->categories()->sync($this->selectedCategories);
 
         session()->flash('success', 'Post updated successfully!');
+        $this->resetInput();
+
         return redirect()->route('admin.posts');
     }
 
     public function render()
     {
-        return view('livewire.post.edit', [
+        return view('livewire.admin.post.edit', [
             'categories' => Category::all()
         ]);
     }

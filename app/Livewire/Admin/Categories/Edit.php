@@ -6,10 +6,13 @@ use Livewire\Component;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 
 #[Layout('components.layouts.app')]
 class Edit extends Component
 {
+    use AuthorizesRequests;
     public $categoryId;
     public $name;
 
@@ -26,6 +29,8 @@ class Edit extends Component
 
     public function update()
     {
+        $this->authorize('update_category');
+
         $this->validate();
 
         $category = Category::findOrFail($this->categoryId);

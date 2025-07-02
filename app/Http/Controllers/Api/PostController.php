@@ -10,21 +10,49 @@ class PostController extends Controller
 {
     public function index()
     {
-        return PostResource::collection(
-            Post::with('categories')
+        try {
+            $posts = Post::with('categories')
                 ->where('status', 'published')
-                ->latest('published_at')
-                ->get()
-        );
+                ->latest('created_at')
+                ->get();
+    
+            return response()->json([
+                'status' => true,
+                'message' => 'Posts retrieved successfully.',
+                'data' => PostResource::collection($posts),
+            ]);
+        } catch (\Throwable $e) {
+            \Log::error('Failed: ' . $e->getMessage());
+    
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to retrieve posts.',
+                'data' => [],
+            ], 500);
+        }
     }
 
     public function show($slug)
     {
+        try {
         $post = Post::with('categories')
             ->where('slug', $slug)
             ->where('status', 'published')
             ->firstOrFail();
 
-        return new PostResource($post);
+         return response()->json([
+                'status' => true,
+                'message' => 'Posts retrieved successfully.',
+                'data' => new PostResource($post),
+            ]);
+
+         } catch (\Throwable $e) {
+    
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to retrieve posts.',
+                'data' => [],
+            ], 500);
+        }
     }
 }

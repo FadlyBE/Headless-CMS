@@ -6,10 +6,13 @@ use Livewire\Component;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 
 #[Layout('components.layouts.app')]
 class Create extends Component
 {
+    use AuthorizesRequests;
     public $name;
 
     protected $rules = [
@@ -18,6 +21,7 @@ class Create extends Component
 
     public function store()
     {
+        $this->authorize('create_category');
         $this->validate();
 
         Category::create([

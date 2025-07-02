@@ -11,15 +11,46 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return CategoryResource::collection(Category::all());
+         try {
+
+            $category= CategoryResource::collection(Category::all());
+            return response()->json([
+                'status' => true,
+                'message' => 'Category retrieved successfully.',
+                'data' => $category
+            ]);
+
+        } catch (\Throwable $e) {
+            \Log::error('Failed: ' . $e->getMessage());
+
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to retrieve category.',
+                'data' => [],
+            ], 500);
+        }
     }
 
-    public function posts($slug)
+    public function show($id)
     {
-        $category = Category::where('slug', $slug)->firstOrFail();
 
-        return PostResource::collection(
-            $category->posts()->where('status', 'published')->get()
-        );
+        try {
+            $category = Category::where('id', $id)->firstOrFail();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Category retrieved successfully.',
+                'data' => $category
+            ]);
+
+        } catch (\Throwable $e) {
+
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to retrieve category.',
+                'data' => [],
+            ], 500);
+        }
+        
     }
 }

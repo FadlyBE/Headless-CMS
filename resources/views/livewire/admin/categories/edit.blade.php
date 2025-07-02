@@ -9,8 +9,9 @@
             @error('name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
-        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Perbarui</button>
-        <a href="{{ route('admin.categories.index') }}" class="ml-4 text-gray-600 underline">Kembali</a>
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">{{ __('button.update')}}</button>
+
+        <a href="{{ route('admin.categories.index') }}" class="ml-4 text-gray-600 underline">Cancel</a>
     </form>
 </div>
 </x-layouts.admin>
