@@ -39,7 +39,7 @@ class Edit extends Component
             'slug' => Str::slug($this->name),
         ]);
 
-        session()->flash('success', 'Kategori berhasil diperbarui!');
+        session()->flash('success', 'Data updated');
         return redirect()->route('admin.categories.index');
     }
 
