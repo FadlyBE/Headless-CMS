@@ -16,6 +16,8 @@ use App\Livewire\Admin\Permission\Index as PermissionIndex;
 use App\Livewire\Admin\Permission\Form as PermissionForm;
 use App\Livewire\Admin\User\Form;
 use App\Livewire\Admin\User\Index;
+use App\Livewire\Admin\Gallery\Gallery;
+
 
 
 Route::get('dashboard', [DashboardController::class, 'index'])
@@ -23,7 +25,8 @@ Route::get('dashboard', [DashboardController::class, 'index'])
     ->name('dashboard');
 
 // Halaman umum
-Route::view('/', 'welcome');
+// Route::view('/', 'welcome');
+Route::redirect('/', '/login');
 
 // Route::view('dashboard', 'dashboard')
 //     ->middleware(['auth', 'verified'])
@@ -66,5 +69,19 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () 
     Route::get('/users/{id}/edit', Form::class)->name('users.edit');
     Route::get('/users', Index::class)->name('users.index');
 
+    Route::get('/gallery', Gallery::class)->name('gallery');
+
+
 
 });
+
+Route::get('lang/{locale}', function ($locale) {
+    if (!in_array($locale, ['en', 'id'])) {
+        abort(400);
+    }
+
+    session(['locale' => $locale]);
+
+    return back();
+})->name('locale.switch');
+

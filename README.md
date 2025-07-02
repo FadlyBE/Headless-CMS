@@ -1,61 +1,81 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🧠 Headless CMS - TALL Stack (Laravel + Livewire)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Technical test submission for Palmcode - Senior Laravel Developer role.
 
-## About Laravel
+## 🔧 Tech Stack
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Laravel 12**
+- **Livewire (TALL Stack)**
+- **Tailwind CSS**
+- **Alpine.js**
+- **Sanctum (for API authentication)**
+- **Spatie Laravel Permission (RBAC)**
+- **Localization (EN & ID)**
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 📦 Features
 
-## Learning Laravel
+- ✅ Admin authentication with Laravel Breeze (Livewire)
+- ✅ RBAC: Role and Permission Management
+- ✅ Post, Page, and Category CRUD (with Livewire modals)
+- ✅ Image upload for posts
+- ✅ JSON REST API for Posts, Pages, and Categories
+- ✅ Multilingual UI: English 🇺🇸 & Bahasa Indonesia 🇮🇩
+- ✅ Admin Dashboard with total counts
+- ✅ Clean and modular structure
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 🚀 Installation Instructions
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 1. Clone the Repository
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+git clone https://github.com/your-username/headless-cms-tall.git
+cd headless-cms-tall
+### 2. Install Dependencies
 
-### Premium Partners
+composer install
+npm install && npm run build
+### 3. Setup Environment
+Copy the .env example:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+cp .env.example .env
+Edit .env and update the following:
 
-## Contributing
+APP_NAME="Headless CMS"
+APP_URL=http://localhost:8000
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+DB_CONNECTION=mysql
+DB_DATABASE=your_database_name
+DB_USERNAME=your_db_user
+DB_PASSWORD=your_db_password
+### 4. Generate App Key & Migrate
 
-## Code of Conduct
+php artisan key:generate
+php artisan migrate
+php artisan db:seed
+⚠️ Seeding includes:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Admin user (email: admin@example.com, password: password)
 
-## Security Vulnerabilities
+### 5. Serve the App
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+php artisan serve
+Visit: http://localhost:8000
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+🌍 Localization
+Use the dropdown in the navbar to switch between:
+
+EN English
+ID Bahasa Indonesia
+
+📡 API Endpoints
+Resource	Endpoint
+Posts	/api/posts
+Pages	/api/pages
+Categories	/api/categories
+
+API is public. You can use tools like Postman or cURL to test.

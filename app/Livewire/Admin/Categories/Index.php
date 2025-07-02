@@ -7,12 +7,13 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 #[Layout('layouts.app')]
 
 class Index extends Component
 {
-    use WithPagination;
+    use WithPagination, AuthorizesRequests;
 
     public $name;
     public $categoryId = null;
@@ -24,6 +25,8 @@ class Index extends Component
 
     public function save()
     {
+        $this->authorize('create_category');
+
         $this->validate();
 
         if ($this->isEditing && $this->categoryId) {
@@ -46,6 +49,8 @@ class Index extends Component
 
     public function edit($id)
     {
+        $this->authorize('edit_category');
+
         $category = Category::findOrFail($id);
         $this->categoryId = $category->id;
         $this->name = $category->name;
@@ -54,6 +59,8 @@ class Index extends Component
 
     public function delete($id)
     {
+        $this->authorize('delete_category');
+
         Category::findOrFail($id)->delete();
         session()->flash('success', 'Category deleted successfully.');
     }

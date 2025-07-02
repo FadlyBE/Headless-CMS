@@ -6,7 +6,7 @@
     @endif
     <div class="bg-white shadow-md rounded-lg p-6 mt-6">
         <div class="flex items-center justify-between mb-4">
-            <h2 class="text-2xl font-semibold text-gray-800">Posts</h2>
+            <h2 class="text-2xl font-semibold text-gray-800">{{ __('sidebar.posts') }}</h2>
             @can('create_post')
             <button wire:click="create"
                 class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
@@ -15,7 +15,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M12 4v16m8-8H4" />
                 </svg>
-                New Post
+                {{ __('button.create') }}
             </button>
             @endcan
         </div>
@@ -23,11 +23,11 @@
         <table class="min-w-full border border-gray-300 mt-6">
             <thead class="bg-gray-100">
                 <tr>
-                    <th class="py-2 px-4 border-b">Image</th>
-                    <th class="py-2 px-4 border-b">Title</th>
-                    <th class="px-6 py-3 text-left">Category</th>
-                    <th class="py-2 px-4 border-b">Status</th>
-                    <th class="py-2 px-4 border-b">Action</th>
+                    <th class="py-2 px-4 border-b"> {{ __('thead.image') }}</th>
+                    <th class="py-2 px-4 border-b">{{ __('thead.title') }}</th>
+                    <th class="px-6 py-3 text-left">{{ __('thead.category') }}</th>
+                    <th class="py-2 px-4 border-b">{{ __('thead.status') }}</th>
+                    <th class="py-2 px-4 border-b">{{ __('thead.action') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -57,7 +57,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M11 5h2M4 17l4.586-4.586a2 2 0 012.828 0L16 17M14 13l6-6m0 0a2.121 2.121 0 00-3-3L11 10" />
                             </svg>
-                            Edit
+                            {{ __('button.edit') }}
                         </button>
                         @endcan
                         @can('delete_post')
@@ -69,7 +69,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M6 18L18 6M6 6l12 12" />
                             </svg>
-                            Delete
+                            {{ __('button.delete') }}
                         </button>
                         @endcan
                     </td>
@@ -181,9 +181,9 @@
 
                 <div class="flex justify-end space-x-2 mt-4">
                     <button type="button" @click="showModal = false"
-                        class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
+                        class="px-4 py-2 bg-gray-300 rounded">{{ __('button.cancel') }}</button>
                     <button type="submit"
-                        class="px-4 py-2 bg-blue-500 text-white rounded">Save</button>
+                        class="px-4 py-2 bg-blue-500 text-white rounded">{{ __('button.save') }}</button>
                 </div>
             </form>
         </div>

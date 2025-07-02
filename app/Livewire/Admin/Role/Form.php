@@ -5,9 +5,11 @@ namespace App\Livewire\Admin\Role;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Form extends Component
 {
+    use AuthorizesRequests;
     public $name;
     public $roleId;
     public $editMode = false;
@@ -32,6 +34,8 @@ class Form extends Component
 
     public function save()
     {
+        $this->authorize('create_role');
+
         $this->validate();
 
         $role = Role::updateOrCreate(
