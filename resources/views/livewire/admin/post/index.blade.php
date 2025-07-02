@@ -88,6 +88,7 @@
         x-show="showModal"
         wire:key="modal-post"
         wire:ignore.self
+        style="display: none;"
         class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div class="bg-white p-6 rounded w-full max-w-xl max-h-[90vh] overflow-y-auto"
             @click.away="showModal = false">
@@ -121,16 +122,16 @@
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
 
-               {{-- Preview gambar jika baru di-upload --}}
-            @if ($image instanceof \Livewire\TemporaryUploadedFile)
-                <div class="mb-2">
-                    <img src="{{ $image->temporaryUrl() }}"
-                        class="rounded object-cover"
-                        style="width: 96px; height: 96px;">
-                </div>
-            @endif
+              
+                @if ($image instanceof \Livewire\TemporaryUploadedFile)
+                    <div class="mb-2">
+                        <img src="{{ $image->temporaryUrl() }}"
+                            class="rounded object-cover"
+                            style="width: 96px; height: 96px;">
+                    </div>
+                @endif
 
-                {{-- Preview untuk gambar dari database (saat edit & belum upload ulang) --}}
+              
                 @if ($postId && is_string($image))
                     <div class="w-24 h-24 overflow-hidden rounded mb-2">
                         <img src="{{ asset('storage/' . $image) }}"
@@ -172,9 +173,7 @@
                             {{ $category->name }}
                         </label>
                         @endforeach
-                    </div>
-
-                
+                    </div>               
                     
                     <script>
                         document.addEventListener('alpine:init', () => {
@@ -186,9 +185,7 @@
                         });
                     </script>
 
-
                 </div>
-
 
                 <div class="flex justify-end space-x-2 mt-4">
                     <button type="button" @click="showModal = false" 
@@ -206,10 +203,10 @@
 
     document.addEventListener('trix-change', function (event) {
         const content = document.querySelector('input#content');
-        content.dispatchEvent(new Event('input')); // trigger Livewire update
+        content.dispatchEvent(new Event('input')); 
     });
 
-    // Tutup modal setelah submit
+   
     window.addEventListener('close-modal', () => {
         const modal = document.querySelector('[x-data]');
         if (modal && modal.__x) {
