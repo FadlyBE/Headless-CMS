@@ -73,7 +73,7 @@ class Form extends Component
         $user->syncRoles([$this->role]);
         $user->syncPermissions($this->permissions);
 
-        $this->dispatch('userSaved'); // untuk nutup modal dari luar
+        $this->dispatch('userSaved');
 
         session()->flash('message', 'User saved successfully.');
     }
