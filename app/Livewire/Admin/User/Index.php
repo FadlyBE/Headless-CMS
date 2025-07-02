@@ -59,8 +59,8 @@ class Index extends Component
         $this->selectedUserId = $user->id;
         $this->name = $user->name;
         $this->email = $user->email;
-        $this->role = $user->roles->pluck('name')->first(); // Ambil satu role
-        $this->permissions = $user->permissions->pluck('name')->toArray(); // Ambil array nama permission
+        $this->role = $user->roles->pluck('name')->first();
+        $this->permissions = $user->permissions->pluck('name')->toArray();
 
         $this->openModal();
     }
@@ -96,7 +96,7 @@ class Index extends Component
         $user->name = $this->name;
         $user->email = $this->email;
 
-        // Set default password saat create
+       
         if (! $user->exists) {
             $user->password = bcrypt('password');
         }
