@@ -23,7 +23,6 @@
         <div class="flex">
             <!-- Sidebar -->
             <div class="w-64 bg-white shadow-md min-h-screen">
-                {{-- Kamu bisa pakai komponen atau hardcoded --}}
                 <livewire:layout.sidebar />
             </div>
 
@@ -41,7 +40,7 @@
             </main>
         </div>
     </div>
-
     @livewireScripts
+    @stack('scripts')
 </body>
 </html>

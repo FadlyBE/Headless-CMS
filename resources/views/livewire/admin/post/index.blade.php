@@ -87,6 +87,7 @@
     <div x-data="{ showModal: @entangle('isOpen') }"
         x-show="showModal"
         wire:key="modal-post"
+        wire:ignore.self
         class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div class="bg-white p-6 rounded w-full max-w-xl max-h-[90vh] overflow-y-auto"
             @click.away="showModal = false">
@@ -96,8 +97,15 @@
                 <input type="text" wire:model.defer="title" placeholder="Title"
                     class="w-full p-2 border rounded mb-2">
 
-                <textarea wire:model.defer="content" placeholder="Content"
-                    class="w-full p-2 border rounded mb-2" rows="5"></textarea>
+                <div class="mb-4" wire:ignore>
+                    <label class="block font-semibold text-gray-700 mb-1">Konten</label>
+                    <input id="content" type="hidden" name="content" wire:model.defer="content">
+                    <trix-editor input="content"></trix-editor>
+                    @error('content') 
+                        <span class="text-red-500 text-sm">{{ $message }}</span> 
+                    @enderror
+                </div>
+
 
                 <textarea wire:model.defer="excerpt" placeholder="Excerpt"
                     class="w-full p-2 border rounded mb-2"></textarea>
@@ -108,27 +116,29 @@
                 </select>
 
                 
-                <input type="file" wire:model="image_upload" class="w-full p-2 border rounded mb-2">
-                @error('image_upload')
-                <p class="text-red-500 text-sm">{{ $message }}</p>
+              <input type="file" wire:model="image" class="w-full p-2 border rounded mb-2">
+                @error('image')
+                    <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
 
-              
-                @if ($image_upload)
+               {{-- Preview gambar jika baru di-upload --}}
+            @if ($image instanceof \Livewire\TemporaryUploadedFile)
                 <div class="mb-2">
-                    <img src="{{ $image_upload->temporaryUrl() }}"
+                    <img src="{{ $image->temporaryUrl() }}"
                         class="rounded object-cover"
                         style="width: 96px; height: 96px;">
                 </div>
+            @endif
+
+                {{-- Preview untuk gambar dari database (saat edit & belum upload ulang) --}}
+                @if ($postId && is_string($image))
+                    <div class="w-24 h-24 overflow-hidden rounded mb-2">
+                        <img src="{{ asset('storage/' . $image) }}"
+                            class="object-cover max-w-full max-h-full w-full h-full rounded">
+                    </div>
                 @endif
 
-             
-                @if ($postId && $image_upload === null && $image = $posts->firstWhere('id', $postId)?->image)
-                <div class="w-24 h-24 overflow-hidden rounded mb-2">
-                    <img src="{{ asset('storage/' . $image) }}"
-                        class="object-cover max-w-full max-h-full w-full h-full rounded">
-                </div>
-                @endif
+
 
                 <div class="mb-4" x-data="{ open: false, selected: @entangle('selectedCategories') }">
                     <label class="block text-gray-700 text-sm font-bold mb-2">Category</label>
@@ -164,6 +174,7 @@
                         @endforeach
                     </div>
 
+                
                     
                     <script>
                         document.addEventListener('alpine:init', () => {
@@ -180,8 +191,8 @@
 
 
                 <div class="flex justify-end space-x-2 mt-4">
-                    <button type="button" @click="showModal = false"
-                        class="px-4 py-2 bg-gray-300 rounded">{{ __('button.cancel') }}</button>
+                    <button type="button" @click="showModal = false" 
+                        class="px-4 py-2 bg-gray-300 rounded" wire:click="cancel">{{ __('button.cancel') }}</button>
                     <button type="submit"
                         class="px-4 py-2 bg-blue-500 text-white rounded">{{ __('button.save') }}</button>
                 </div>
@@ -189,3 +200,46 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script>
+
+    document.addEventListener('trix-change', function (event) {
+        const content = document.querySelector('input#content');
+        content.dispatchEvent(new Event('input')); // trigger Livewire update
+    });
+
+    // Tutup modal setelah submit
+    window.addEventListener('close-modal', () => {
+        const modal = document.querySelector('[x-data]');
+        if (modal && modal.__x) {
+            modal.__x.$data.showModal = false;
+        }
+    });
+
+     Livewire.on('resetTrix', () => {
+        const trixInput = document.querySelector('input#content');
+        const trixEditor = document.querySelector('trix-editor');
+        if (trixInput && trixEditor) {
+            trixInput.value = '';
+            trixEditor.editor.loadHTML('');
+        }
+    });
+
+  Livewire.on('updateTrixContent', data => {
+    console.log('📥 Update Trix Content:', data);
+    const content = typeof data === 'object' && data.content ? data.content : data;
+
+    setTimeout(() => {
+        const trixInput = document.querySelector('input#content');
+        const trixEditor = document.querySelector('trix-editor');
+        if (trixInput && trixEditor) {
+            trixInput.value = content;
+            trixEditor.editor.loadHTML(content);
+        }
+    }, 100);
+});
+
+
+</script>
+@endpush
