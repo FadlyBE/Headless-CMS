@@ -8,7 +8,6 @@ Technical test submission for Palmcode - Senior Laravel Developer role.
 - **Livewire (TALL Stack)**
 - **Tailwind CSS**
 - **Alpine.js**
-- **Sanctum (for API authentication)**
 - **Spatie Laravel Permission (RBAC)**
 - **Localization (EN & ID)**
 
@@ -21,9 +20,9 @@ Technical test submission for Palmcode - Senior Laravel Developer role.
 - ✅ Post, Page, and Category CRUD (with Livewire modals)
 - ✅ Image upload for posts
 - ✅ JSON REST API for Posts, Pages, and Categories
-- ✅ Multilingual UI: English 🇺🇸 & Bahasa Indonesia 🇮🇩
+- ✅ Multilingual UI: English EN & Bahasa Indonesia ID
 - ✅ Admin Dashboard with total counts
-- ✅ Clean and modular structure
+- ✅ Clean and modular structure With Liveware
 
 ---
 
