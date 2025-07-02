@@ -56,9 +56,9 @@ class Index extends Component
 
     public function updatedImage()
     {
-        // Reset image lama dari DB agar tidak muncul dobel
+       
         if ($this->image instanceof \Livewire\TemporaryUploadedFile) {
-            $this->image = $this->image; // ini trigger tetap simpan image baru
+            $this->image = $this->image; 
         }
     }
 
@@ -72,7 +72,7 @@ class Index extends Component
 
     public function create()
     {
-        $this->resetInput(); // Ini sudah bagus
+        $this->resetInput();
         $this->postId = null;
         $this->image = null;
         $this->isOpen = true;
@@ -149,7 +149,7 @@ class Index extends Component
 
         $post->delete();
 
-        session()->flash('success', 'Post berhasil dihapus.');
+        session()->flash('success', 'Data deleted.');
     }
 
     private function resetInput()
