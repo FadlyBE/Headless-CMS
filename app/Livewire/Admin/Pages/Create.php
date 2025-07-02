@@ -39,7 +39,7 @@ class Create extends Component
             'status' => $this->status,
         ]);
 
-        session()->flash('success', 'Page berhasil dibuat.');
+        session()->flash('success', 'Data created.');
         return redirect()->route('admin.pages.index');
     }
 
