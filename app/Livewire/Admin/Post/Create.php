@@ -29,9 +29,9 @@ class Create extends Component
 
     public function updatedImage()
     {
-        // Reset image lama dari DB agar tidak muncul dobel
+        
         if ($this->image instanceof \Livewire\TemporaryUploadedFile) {
-            $this->image = $this->image; // ini trigger tetap simpan image baru
+            $this->image = $this->image;
         }
     }
 
